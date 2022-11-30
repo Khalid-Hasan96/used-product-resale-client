@@ -1,16 +1,54 @@
-import React, { useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/login.png';
+import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
+      const { providerLogin, signIn } = useContext(AuthContext);
       const { register, formState: { errors }, handleSubmit } = useForm();
       const [loginError, setLoginError] = useState('');
+      const [userEmail, setUserEmail] = useState('');
+      const [token] = useToken(userEmail)
+      const location = useLocation();
+      const navigate = useNavigate();
+      const from = location.state?.from?.pathname || '/';
+
+      if (token) {
+            navigate(from, { replace: true });
+      }
+
+      const googleProvider = new GoogleAuthProvider();
+
+      const handleGoogleSignin = () => {
+            providerLogin(googleProvider)
+                  .then(result => {
+                        const user = result.user;
+                        setUserEmail(user.email);
+                        toast.success('Welcome')
+                  })
+                  .catch(err => {
+                        setLoginError(err.message);
+                        toast.error(err.message)
+                  })
+      }
 
       const handleLogin = data => {
-
-
+            setLoginError('');
+            signIn(data.email, data.password)
+                  .then(result => {
+                        const user = result.user;
+                        setUserEmail(data.email)
+                        toast.success('Welcome')
+                  })
+                  .catch(err => {
+                        setLoginError(err.message);
+                        toast.error(err.message)
+                  })
       }
       return (
             <div className='my-10'>
@@ -57,7 +95,7 @@ const Login = () => {
                               </form>
                               <p className='mt-2'>Didn't have account? Please <Link to='/signup' className='underline hover:text-blue-600'>Signup</Link> </p>
                               <div className='divider my-10'>OR</div>
-                              <button className='btn bg-white text-black w-full text-xl'><span className='text-3xl'><FcGoogle /></span>&nbsp; Google</button>
+                              <button onClick={handleGoogleSignin} className='btn bg-white text-black w-full text-xl'><span className='text-3xl'><FcGoogle /></span>&nbsp; Google</button>
                         </div>
 
                   </div>

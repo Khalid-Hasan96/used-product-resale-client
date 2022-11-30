@@ -1,18 +1,26 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import { Result } from 'postcss';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import signup from '../../assets/signup.png';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Signup = () => {
       const { register, formState: { errors }, handleSubmit } = useForm();
       const [signupError, setSignupError] = useState('');
       const { providerLogin, createUser, updateUser } = useContext(AuthContext);
+      const [userEmail, setUserEmail] = useState('');
+      const [token] = useToken(userEmail);
+      const navigate = useNavigate();
+
       const googleProvider = new GoogleAuthProvider();
+
+      if (token) {
+            navigate('/')
+      }
 
       const handleGoogleSignUp = () => {
             providerLogin(googleProvider)
@@ -21,13 +29,18 @@ const Signup = () => {
                         toast.success('User created successfully');
                         const userInfo = {
                               displayName: user.displayName,
+                              email: user.email,
                               photoURL: user.photoURL,
                         }
                         updateUser(userInfo)
                               .then(() => {
-                                    saveUser(user.displayName, user.photoURL);
+                                    saveUser(user.displayName, user.email, user.photoURL);
                               })
 
+                  })
+                  .catch(err => {
+                        setSignupError(err.message);
+                        toast.error(err.message)
                   })
       }
 
@@ -47,7 +60,10 @@ const Signup = () => {
                                     saveUser(data.name, data.email, data.photo, data.role);
                               })
                   })
-                  .catch(err => setSignupError(err.message))
+                  .catch(err => {
+                        setSignupError(err.message)
+                        toast.error(err.message)
+                  })
       }
 
       const saveUser = (name, email, photo, role) => {
@@ -61,7 +77,7 @@ const Signup = () => {
             })
                   .then(res => res.json())
                   .then(data => {
-                        console.log(data)
+                        setUserEmail(email)
                   })
       }
       return (
