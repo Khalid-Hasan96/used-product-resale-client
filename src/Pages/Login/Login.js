@@ -9,13 +9,13 @@ const Login = () => {
       const [loginError, setLoginError] = useState('');
 
       const handleLogin = data => {
-            console.log(data);
+
 
       }
       return (
             <div className='my-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Login</h2>
-                  <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-10 flex flex-col gap-5 lg:flex-row'>
+                  <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-3 flex flex-col gap-5 lg:flex-row'>
                         <img src={login} className='w-1/2' alt="" />
                         <div className='border p-5 rounded-xl w-2/4'>
                               <form onSubmit={handleSubmit(handleLogin)}>
@@ -57,7 +57,7 @@ const Login = () => {
                               </form>
                               <p className='mt-2'>Didn't have account? Please <Link to='/signup' className='underline hover:text-blue-600'>Signup</Link> </p>
                               <div className='divider my-10'>OR</div>
-                              <button className='btn bg-white text-black w-full text-xl'><FcGoogle />oogle</button>
+                              <button className='btn bg-white text-black w-full text-xl'><span className='text-3xl'><FcGoogle /></span>&nbsp; Google</button>
                         </div>
 
                   </div>

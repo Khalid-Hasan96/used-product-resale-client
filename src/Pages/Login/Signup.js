@@ -1,5 +1,8 @@
+import { GoogleAuthProvider } from 'firebase/auth';
+import { Result } from 'postcss';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import signup from '../../assets/signup.png';
@@ -7,16 +10,64 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Signup = () => {
       const { register, formState: { errors }, handleSubmit } = useForm();
-      const [loginError, setLoginError] = useState('');
-      const { createUser, updateUser } = useContext(AuthContext);
+      const [signupError, setSignupError] = useState('');
+      const { providerLogin, createUser, updateUser } = useContext(AuthContext);
+      const googleProvider = new GoogleAuthProvider();
+
+      const handleGoogleSignUp = () => {
+            providerLogin(googleProvider)
+                  .then(result => {
+                        const user = result.user;
+                        toast.success('User created successfully');
+                        const userInfo = {
+                              displayName: user.displayName,
+                              photoURL: user.photoURL,
+                        }
+                        updateUser(userInfo)
+                              .then(() => {
+                                    saveUser(user.displayName, user.photoURL);
+                              })
+
+                  })
+      }
 
       const handleSignup = data => {
-            console.log(data)
+            setSignupError('');
+            createUser(data.email, data.password)
+                  .then(result => {
+                        const user = result.user;
+                        toast.success('User created successfully');
+                        const userInfo = {
+                              displayName: data.name,
+                              photoURL: data.photo,
+                              role: data.role
+                        }
+                        updateUser(userInfo)
+                              .then(() => {
+                                    saveUser(data.name, data.email, data.photo, data.role);
+                              })
+                  })
+                  .catch(err => setSignupError(err.message))
+      }
+
+      const saveUser = (name, email, photo, role) => {
+            const user = { name, email, photo, role };
+            fetch('http://localhost:5000/users', {
+                  method: 'POST',
+                  headers: {
+                        'content-type': 'application/json'
+                  },
+                  body: JSON.stringify(user)
+            })
+                  .then(res => res.json())
+                  .then(data => {
+                        console.log(data)
+                  })
       }
       return (
             <div className='my-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Signup</h2>
-                  <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-10 flex flex-col gap-5 lg:flex-row'>
+                  <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-3 flex flex-col gap-5 lg:flex-row'>
                         <img src={signup} className='w-1/2' alt="" />
                         <div className='border p-5 rounded-xl w-2/4'>
                               <form onSubmit={handleSubmit(handleSignup)}>
@@ -53,7 +104,7 @@ const Signup = () => {
 
                                     </div>
                                     <div>
-                                          {loginError && <p className='text-error'>{loginError}</p>}
+                                          {signupError && <p className='text-error'>{signupError}</p>}
                                     </div>
 
                                     <div>
@@ -72,7 +123,7 @@ const Signup = () => {
                               </form>
                               <p className='mt-2'>Already have an account? Please <Link to='/login' className='underline hover:text-blue-600'>Login</Link> </p>
                               <div className='divider my-10'>OR</div>
-                              <button className='btn bg-white text-black w-full text-xl'><FcGoogle />oogle</button>
+                              <button onClick={handleGoogleSignUp} className='btn bg-white text-black w-full text-xl'><span className='text-3xl'><FcGoogle /></span>&nbsp; Google</button>
                         </div>
 
                   </div>
