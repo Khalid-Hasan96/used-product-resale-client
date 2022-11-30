@@ -79,18 +79,6 @@ const Login = () => {
                                           {loginError && <p className='text-error'>{loginError}</p>}
                                     </div>
 
-                                    <div>
-                                          <label className="label"><span className="label-text text-white">Who are you?</span></label>
-                                          <select className="select select-bordered w-full text-black"
-                                                {...register("role", {
-                                                      required: '=Select your role.',
-                                                })}
-                                          >
-                                                <option selected>Buyer</option>
-                                                <option>Seller</option>
-                                          </select>
-                                    </div>
-
                                     <input className='btn btn-accent w-full mt-5' value="Login" type="submit" />
                               </form>
                               <p className='mt-2'>Didn't have account? Please <Link to='/signup' className='underline hover:text-blue-600'>Signup</Link> </p>
