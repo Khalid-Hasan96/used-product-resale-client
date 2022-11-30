@@ -7,17 +7,17 @@ const DisplayProducts = ({ allProducts }) => {
                   <figure><img src={img} alt="" /></figure>
                   <div className="card-body">
                         <h2 className="card-title">{product}</h2>
-                        <p>Location: {location}</p>
-                        <p>Price: $<span className='text-3xl '>{price}</span></p>
-                        <p>Original Price: $<span className='text-xl'>{originalprice}</span></p>
-                        <p>Used for: {yearsofuse} years</p>
-                        <p>Time: {time}</p>
-                        <p>Seller Name: {seller}</p>
+                        <p><small>Location:</small> {location}</p>
+                        <p><small>Price:         </small> $<span className='text-3xl '>{price}</span></p>
+                        <p><small>Original Price:</small> $<span className='text-xl'>{originalprice}</span></p>
+                        <p><small>Used for:</small> {yearsofuse} years</p>
+                        <p><small>Seller:</small> {seller}</p>
+                        <p><small>Time:</small> {time}</p>
                         <div className="card-actions w-full">
                               <button className="btn btn-primary">Book Now</button>
                         </div>
                   </div>
-            </div>
+            </div >
       );
 };
 
