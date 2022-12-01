@@ -2,11 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const AllUsers = () => {
-      const { data: allUsers = [], refetch } = useQuery({
-            queryKey: ['users'],
+const AllSeller = () => {
+
+      const { data: allSellers = [], refetch } = useQuery({
+            queryKey: ['allSellers'],
             queryFn: async () => {
-                  const res = await fetch('http://localhost:5000/users');
+                  const res = await fetch('http://localhost:5000/users/sellers');
                   const data = await res.json();
                   return data;
             }
@@ -44,7 +45,6 @@ const AllUsers = () => {
                   })
 
       }
-
       return (
             <div className='p-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>All User</h2>
@@ -64,7 +64,7 @@ const AllUsers = () => {
                               <tbody>
 
                                     {
-                                          allUsers.map((user, i) => <tr key={user._id} className="hover">
+                                          allSellers.map((user, i) => <tr key={user._id} className="hover">
                                                 <th>{i + 1}</th>
                                                 <td className='flex items-center'>
                                                       <div className="avatar items-center">
@@ -90,4 +90,4 @@ const AllUsers = () => {
       );
 };
 
-export default AllUsers;
+export default AllSeller;

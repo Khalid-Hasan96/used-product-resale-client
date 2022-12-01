@@ -40,6 +40,8 @@ const AuthProvider = ({ children }) => {
             return () => unsubscribe();
       }, [])
 
+      console.log('auth context', user)
+
       const authInfo = {
             user,
             providerLogin,
