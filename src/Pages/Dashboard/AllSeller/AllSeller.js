@@ -13,9 +13,9 @@ const AllSeller = () => {
             }
       })
 
-      const handleMakeAdmin = id => {
-            fetch(`http://localhost:5000/users/admin/${id}`, {
-                  method: 'PUT',
+      const handleVerifySeller = id => {
+            fetch(`http://localhost:5000/users/sellers/${id}`, {
+                  method: 'PATCH',
                   headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                   }
@@ -23,7 +23,7 @@ const AllSeller = () => {
                   .then(res => res.json())
                   .then(data => {
                         if (data.modifiedCount > 0) {
-                              toast.success('Admin added successfully');
+                              toast.success('Seller Verified');
                               refetch();
                         }
                   })
@@ -76,7 +76,7 @@ const AllSeller = () => {
                                                 </td>
                                                 <td>{user?.email}</td>
                                                 <td>{user?.role ? user.role : 'Buyer'}</td>
-                                                <td>{user?.role !== 'Admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button>}</td>
+                                                <td>{user?.role !== 'Admin' && <button onClick={() => handleVerifySeller(user._id)} className='btn btn-success btn-xs'>{user?.verifiedSeller ? 'Verified' : 'Verify'}</button>}</td>
                                                 <td>{user?.role !== 'Admin' && <button onClick={() => handleDeleteUser(user._id)} className='btn btn-xs btn-error'>Delete</button>}</td>
                                           </tr>)
                                     }
