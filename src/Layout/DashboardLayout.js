@@ -8,19 +8,19 @@ const DashboardLayout = () => {
             <div>
                   <Navbar></Navbar>
                   <div className="drawer drawer-mobile">
-                        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content flex flex-col items-center justify-center">
+                        <input id="pcbuy-drawer" type="checkbox" className="drawer-toggle" />
+                        <div className="drawer-content">
                               <Outlet></Outlet>
-                              <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
                         </div>
                         <div className="drawer-side">
-                              <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                              <label htmlFor="pcbuy-drawer" className="drawer-overlay"></label>
                               <ul className="menu p-4 w-80 bg-neutral text-neutral-content border rounded-xl">
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/allusers'>All User</Link></li>
                                     <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Orders</Link></li>
-                                    <li className='border hover:bg-lime-400 text-zinc-50 '><Link>All Seller</Link></li>
-                                    <li className='border hover:bg-lime-400 text-zinc-50 '><Link>All Buyer</Link></li>
-                                    <li className='border hover:bg-lime-400 text-zinc-50 '><Link>Reported Items</Link></li>
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>All Seller</Link></li>
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>All Buyer</Link></li>
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>Reported Items</Link></li>
                                     <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>Add a Product</Link></li>
                                     <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Products</Link></li>
                                     <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Buyers</Link></li>
