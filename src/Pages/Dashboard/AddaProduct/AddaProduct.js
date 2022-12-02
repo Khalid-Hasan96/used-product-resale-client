@@ -31,6 +31,7 @@ const AddaProduct = () => {
                   yearofpurchase: data.purchase,
                   seller: data.seller,
                   email: data.email,
+                  sellerId: data.sellerId,
                   phone: data.phone,
                   time: data.time
 
@@ -161,6 +162,14 @@ const AddaProduct = () => {
                                           required: 'Seller phone number is required'
                                     })} className="input input-bordered w-full" />
                                     {errors.phone && <p className='text-error'>{errors.phone.message}</p>}
+                              </div>
+
+                              <div className="form-control w-full">
+                                    <label className="label "><span className="label-text text-white">Description</span></label>
+                                    <textarea type='text' {...register("description", {
+                                          required: 'Description is required'
+                                    })} className="input input-bordered w-full h-32" />
+                                    {errors.description && <p className='text-error'>{errors.description.message}</p>}
                               </div>
                               <div className="form-control w-full">
                                     <label className="label "><span className="label-text text-white">Time</span></label>

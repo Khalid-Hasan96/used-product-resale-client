@@ -38,7 +38,7 @@ const DashboardLayout = () => {
                                                 <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/allbuyers'>All Buyer</Link></li>
                                                 <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>Reported Items</Link></li>
                                                 <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/addproduct'>Add a Product</Link></li>
-                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Products</Link></li>
+                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/myproducts'>My Products</Link></li>
                                                 <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Buyers</Link></li>
                                           </>
                                     }
