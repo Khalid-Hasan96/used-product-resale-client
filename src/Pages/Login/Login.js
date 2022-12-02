@@ -44,7 +44,7 @@ const Login = () => {
             signIn(data.email, data.password)
                   .then(result => {
                         const user = result.user;
-                        setUserEmail(user.email)
+                        setUserEmail(data.email)
                         toast.success('Welcome')
                   })
                   .catch(err => {

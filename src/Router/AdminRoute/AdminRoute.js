@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import Loading from '../../components/Loading/Loading';
+
 import { AuthContext } from '../../contexts/AuthProvider';
 
 import useAdmin from '../../hooks/useAdmin';
@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
       const location = useLocation();
 
       if (loading || isAdminLoading) {
-            return <Loading></Loading>
+            return <h1 className='text-5x text-center'>Loading...</h1>
       }
 
       if (user && isAdmin) {

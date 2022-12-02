@@ -13,12 +13,14 @@ import Home from "../../Pages/Home/Home/Home";
 import LoadProducts from "../../Pages/Home/ProductCategories/LoadProducts";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Login/Signup";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 
 
 const router = createBrowserRouter([
       {
             path: '/',
             element: <Main></Main>,
+            errorElement: <DisplayError></DisplayError>,
             children: [
                   {
                         path: '/',
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
       {
             path: '/dashboard',
             element: <DashboardLayout></DashboardLayout>,
+            errorElement: <DisplayError></DisplayError>,
             children: [
                   {
                         path: '/dashboard',

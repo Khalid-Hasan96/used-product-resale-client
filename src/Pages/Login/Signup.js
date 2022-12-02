@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import signup from '../../assets/signup.png';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
@@ -59,6 +59,7 @@ const Signup = () => {
                               .then(() => {
                                     saveUser(data.name, data.email, data.photo, data.role);
                               })
+                              .catch(err => console.error(err))
                   })
                   .catch(err => {
                         setSignupError(err.message)
