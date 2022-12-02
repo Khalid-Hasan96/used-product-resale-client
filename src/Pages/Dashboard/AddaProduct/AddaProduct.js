@@ -2,12 +2,14 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddaProduct = () => {
       const { user } = useContext(AuthContext);
       const { register, handleSubmit, formState: { errors } } = useForm();
       const time = new Date();
+      const navigate = useNavigate();
 
       const [categories, setCategories] = useState([])
       useEffect(() => {
@@ -33,7 +35,8 @@ const AddaProduct = () => {
                   email: data.email,
                   sellerId: data.sellerId,
                   phone: data.phone,
-                  time: data.time
+                  time: data.time,
+                  description: data.description
 
 
 
@@ -50,7 +53,7 @@ const AddaProduct = () => {
                   .then(result => {
                         console.log(result)
                         toast.success('Product added successfully');
-
+                        navigate('/dashboard/myproducts')
                   })
 
       }
@@ -58,7 +61,7 @@ const AddaProduct = () => {
       return (
             <div className='p-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Add a Product</h2>
-                  <div className='mt-3 p-10 bg-neutral   rounded-2xl'>
+                  <div className='mt-3 p-10 bg-neutral rounded-2xl'>
                         <form onSubmit={handleSubmit(handleAddProduct)}>
                               <div className="form-control w-full">
                                     <label className="label "><span className="label-text text-white">Product Name</span></label>
@@ -168,7 +171,7 @@ const AddaProduct = () => {
                                     <label className="label "><span className="label-text text-white">Description</span></label>
                                     <textarea type='text' {...register("description", {
                                           required: 'Description is required'
-                                    })} className="input input-bordered w-full h-32" />
+                                    })} className="input input-bordered w-full h-32 p-6" />
                                     {errors.description && <p className='text-error'>{errors.description.message}</p>}
                               </div>
                               <div className="form-control w-full">

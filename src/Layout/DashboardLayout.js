@@ -24,13 +24,9 @@ const DashboardLayout = () => {
                               <label htmlFor="pcbuy-drawer" className="drawer-overlay"></label>
                               <ul className="menu p-4 w-80 bg-neutral text-neutral-content border rounded-xl">
                                     <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Orders</Link></li>
-                                    {
-                                          isSeller && <>
-                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/addproduct'>Add a Product</Link></li>
-                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Products</Link></li>
-                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Buyers</Link></li>
-                                          </>
-                                    }
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/addproduct'>Add a Product</Link></li>
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/myproducts'>My Products</Link></li>
+
                                     {
                                           isAdmin && <>
                                                 <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/allusers'>All User</Link></li>
