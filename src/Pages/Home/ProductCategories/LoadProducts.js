@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from './BookingModal';
 import DisplayProducts from './DisplayProducts';
 
 const LoadProducts = () => {
+      const [modalProduct, setModalProduct] = useState(null);
       const products = useLoaderData();
 
       return (
@@ -13,9 +15,18 @@ const LoadProducts = () => {
                               products.map(product => <DisplayProducts
                                     key={product._id}
                                     allProducts={product}
+                                    setModalProduct={setModalProduct}
                               ></DisplayProducts>)
                         }
                   </div>
+                  {
+                        modalProduct &&
+                        <BookingModal
+                              modalProduct={modalProduct}
+                              setModalProduct={setModalProduct}
+                        >
+                        </BookingModal>
+                  }
             </div>
       );
 };

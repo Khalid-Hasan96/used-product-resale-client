@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
-const DisplayProducts = ({ allProducts }) => {
+const DisplayProducts = ({ allProducts, setModalProduct }) => {
       const { user } = useContext(AuthContext);
-      const { img, product, location, price, condition, description, category, originalprice, yearsofuse, yearofpurchase, time, seller } = allProducts;
+      const { img, product, location, price, condition, description, category, originalprice, yearofpurchase, time, seller } = allProducts;
       return (
             <div className="card bg-neutral text-neutral-content shadow-xl">
                   <figure><img src={img} alt="" /></figure>
@@ -20,11 +20,18 @@ const DisplayProducts = ({ allProducts }) => {
                         <p><small>Seller:</small> {seller}{user?.verifiedSeller && <FaCheck></FaCheck>}  </p>
                         <p><small>Time:</small> {time}</p>
                         <div className="card-actions w-full">
-                              <button className="btn btn-primary">Book Now</button>
+                              <label
+
+                                    onClick={() => setModalProduct(allProducts)} htmlFor="booking-modal"
+                                    className="btn btn-primary text-white">Book Now</label>
                         </div>
+
                   </div>
             </div >
       );
 };
+
+
+
 
 export default DisplayProducts;
