@@ -10,7 +10,7 @@ const DashboardLayout = () => {
       const { user } = useContext(AuthContext);
       const [isAdmin] = useAdmin(user?.email);
       const [isSeller] = useSeller(user?.email);
-
+      console.log(user)
       return (
             <div>
                   <Navbar></Navbar>
@@ -23,9 +23,13 @@ const DashboardLayout = () => {
                         <div className="drawer-side">
                               <label htmlFor="pcbuy-drawer" className="drawer-overlay"></label>
                               <ul className="menu p-4 w-80 bg-neutral text-neutral-content border rounded-xl">
-                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link>My Orders</Link></li>
-                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/addproduct'>Add a Product</Link></li>
-                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/myproducts'>My Products</Link></li>
+                                    <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/myorders'>My Orders</Link></li>
+                                    {
+                                          isSeller && <>
+                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/addproduct'>Add a Product</Link></li>
+                                                <li className='border hover:bg-lime-400 text-zinc-50 mt-3'><Link to='/dashboard/myproducts'>My Products</Link></li>
+                                          </>
+                                    }
 
                                     {
                                           isAdmin && <>

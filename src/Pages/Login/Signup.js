@@ -84,8 +84,8 @@ const Signup = () => {
             <div className='my-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Signup</h2>
                   <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-3 flex flex-col gap-5 lg:flex-row'>
-                        <img src={signup} className='w-1/2' alt="" />
-                        <div className='border p-5 rounded-xl w-2/4'>
+                        <img src={signup} className='w-full lg:w-1/2' alt="" />
+                        <div className='border p-5 rounded-xl w-full lg:w-2/4'>
                               <form onSubmit={handleSubmit(handleSignup)}>
                                     <div className="form-control w-full ">
                                           <label className="label"><span className="label-text text-white">Name</span></label>

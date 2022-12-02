@@ -6,12 +6,14 @@ const useSeller = email => {
 
 
       useEffect(() => {
-            fetch(`http://localhost:5000/users/seller/:email`)
-                  .then(res => res.json())
-                  .then(data => {
-                        setIsSeller(data.isSeller)
-                        setIsSellerLoading(false)
-                  })
+            if (email) {
+                  fetch(`http://localhost:5000/users/seller/${email}`)
+                        .then(res => res.json())
+                        .then(data => {
+                              setIsSeller(data.isSeller)
+                              setIsSellerLoading(false)
+                        })
+            }
       }, [email])
 
       return [isSeller, isSellerLoading]

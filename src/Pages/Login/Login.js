@@ -14,8 +14,10 @@ const Login = () => {
       const [loginError, setLoginError] = useState('');
       const [userEmail, setUserEmail] = useState('');
       const [token] = useToken(userEmail)
+
       const location = useLocation();
       const navigate = useNavigate();
+
       const from = location.state?.from?.pathname || '/';
 
       if (token) {
@@ -54,8 +56,8 @@ const Login = () => {
             <div className='my-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Login</h2>
                   <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-3 flex flex-col gap-5 lg:flex-row'>
-                        <img src={login} className='w-1/2' alt="" />
-                        <div className='border p-5 rounded-xl w-2/4'>
+                        <img src={login} className='w-full lg:w-1/2' alt="" />
+                        <div className='border p-5 rounded-xl w-full lg:w-2/4'>
                               <form onSubmit={handleSubmit(handleLogin)}>
                                     <div className="form-control w-full ">
                                           <label className="label"><span className="label-text text-white">Email</span></label>

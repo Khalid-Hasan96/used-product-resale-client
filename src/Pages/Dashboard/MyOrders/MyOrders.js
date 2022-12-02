@@ -3,13 +3,13 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
-const MyProduct = () => {
+const MyOrders = () => {
       const { user } = useContext(AuthContext);
 
       const { data: myProducts = [], refetch } = useQuery({
             queryKey: ['allSellers'],
             queryFn: async () => {
-                  const res = await fetch(`http://localhost:5000/myproducts?email=${user?.email}`);
+                  const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
                   const data = await res.json();
                   return data;
             }
@@ -18,7 +18,7 @@ const MyProduct = () => {
 
 
       const handleDeleteProduct = id => {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`http://localhost:5000/bookings/${id}`, {
                   method: 'DELETE',
             })
                   .then(res => res.json())
@@ -29,10 +29,9 @@ const MyProduct = () => {
                         }
                   })
       }
-
       return (
             <div className='p-10'>
-                  <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>My Products</h2>
+                  <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>My Orders</h2>
 
                   <div className="overflow-x-auto mt-3 p-10 bg-neutral rounded-2xl">
                         <table className="table w-full">
@@ -41,6 +40,7 @@ const MyProduct = () => {
                                           <th></th>
                                           <th>Name</th>
                                           <th>Price</th>
+                                          <th></th>
                                           <th></th>
 
                                     </tr>
@@ -60,7 +60,8 @@ const MyProduct = () => {
                                                 </td>
                                                 <td>${product?.price}</td>
 
-                                                <td>{product?.role !== 'Admin' && <button onClick={() => handleDeleteProduct(product._id)} className='btn btn-xs btn-error'>Delete</button>}</td>
+                                                <td><button className='btn btn-xs btn-success'>Pay</button></td>
+                                                <td><button onClick={() => handleDeleteProduct(product._id)} className='btn btn-xs btn-error'>Delete</button></td>
                                           </tr>)
                                     }
 
@@ -72,4 +73,4 @@ const MyProduct = () => {
       );
 };
 
-export default MyProduct;
+export default MyOrders;
