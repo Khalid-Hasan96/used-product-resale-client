@@ -5,7 +5,7 @@ import DisplayCategories from './DisplayCategories';
 const ProductCategories = () => {
       const [categories, setCategories] = useState([]);
       useEffect(() => {
-            fetch('http://localhost:5000/categories')
+            fetch('https://used-products-resale-server-khalid-hasan96.vercel.app/categories')
                   .then(res => res.json())
                   .then(data => setCategories(data))
       }, [])

@@ -13,7 +13,7 @@ const AddaProduct = () => {
 
       const [categories, setCategories] = useState([])
       useEffect(() => {
-            axios.get('http://localhost:5000/category')
+            axios.get('https://used-products-resale-server-khalid-hasan96.vercel.app/category')
                   .then(res => setCategories(res.data));
       }, [])
 
@@ -42,7 +42,7 @@ const AddaProduct = () => {
 
             }
 
-            fetch('http://localhost:5000/products', {
+            fetch('https://used-products-resale-server-khalid-hasan96.vercel.app/products', {
                   method: 'POST',
                   headers: {
                         'content-type': 'application/json',

@@ -69,7 +69,7 @@ const Signup = () => {
 
       const saveUser = (name, email, photo, role) => {
             const user = { name, email, photo, role };
-            fetch('http://localhost:5000/users', {
+            fetch('https://used-products-resale-server-khalid-hasan96.vercel.app/users', {
                   method: 'POST',
                   headers: {
                         'content-type': 'application/json'
