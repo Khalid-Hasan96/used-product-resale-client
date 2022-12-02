@@ -10,7 +10,7 @@ const DashboardLayout = () => {
       const { user } = useContext(AuthContext);
       const [isAdmin] = useAdmin(user?.email);
       const [isSeller] = useSeller(user?.email);
-      console.log(isAdmin)
+
       return (
             <div>
                   <Navbar></Navbar>
