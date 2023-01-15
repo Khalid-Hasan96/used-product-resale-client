@@ -55,6 +55,7 @@ const Login = () => {
       return (
             <div className='my-10'>
                   <h2 className='text-3xl text-center underline underline-offset-8 font-bold'>Login</h2>
+                  <h4 className='text-center mt-2'>For Testing Purpose: <br /> Email: <span className='text-red-500'>admin@test.com</span> password: <span className='text-red-500'>admin1234</span></h4>
                   <div className='max-w-screen-xl mx-auto bg-neutral text-neutral-content rounded-2xl p-10 mt-3 flex flex-col gap-5 lg:flex-row'>
                         <img src={login} className='w-full lg:w-1/2' alt="" />
                         <div className='border p-5 rounded-xl w-full lg:w-2/4'>
